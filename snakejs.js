@@ -1,155 +1,88 @@
-// variables 
+//  this game created by mohammad hussain in october, 27 ,2022
 
-let loc={x:0,y:0}
-let ran1,ran2,ran3,ran4;
-let seed=  document.querySelector("#seed");
-let direction;
+
+
+// variables
 let snake=document.querySelector("#snake");
-let RL=0;
-let TB=0;
-let stopMoveRight,StopMoveleft,StopMoveTop,StopMoveButton;
+let seed=document.querySelector("#seed");
+let highscore=document.querySelector("#high_score");
+let score=document.querySelector("#score");
+let play_btn=document.querySelector("#play");
 let massage=document.querySelector("#massage");
-let play_btn=document.querySelector("#btn");
-let snakeaccident=false;
+let x=0,y=0;
+let direction;
+
+// random number
+let ran1=1160*Math.random();
+let ran2=480*Math.random();
 
 
-// call functions
-set_seed_possion();
-paly();
-// keys
-document.onkeydown = function move(event) {
- if(play_btn.style.display=="none"){
-   if(event.keyCode==37 ){
- 
-   StopMoveleft=setInterval( move_left ,10);
-    clearInterval(StopMoveTop);  
-    snake.style.transform="rotate("+0+"deg)";
-    clearInterval(StopMoveButton);
-    clearInterval(stopMoveRight)
-    direction="left";
-   
-   }
-else if(event.keyCode==38){
- 
-   StopMoveTop=setInterval(move_top,10);
-   snake.style.transform="rotate("+90+"deg)";
-   clearInterval(StopMoveleft);  
-   clearInterval(StopMoveButton);
-   clearInterval(stopMoveRight)
-   direction="top";
+
+// call  functions
+
+
+play_btn.addEventListener("click",()=>{
+
+   play_btn.style.display="none";
+
+})
+
+
+// move the snake 
+let g=190,h=110;
+
+document.onkeydown=function (e){
+if(e.keyCode==37){//
+setInterval(()=>{
+   g-=1;
+   snake.style.left=g+"px";
+   },0.6)
 }
-else if(event.keyCode==39)
+else if(e.keyCode==38)
 {
- 
-   stopMoveRight=setInterval(move_right, 10);
-   clearInterval(StopMoveTop);  
-   snake.style.transform="rotate("+0+"deg)";
-    clearInterval(StopMoveButton);
-    clearInterval(stopMoveleft)
-   direction="right"
-   }
-else if(event.keyCode==40)
-{
- 
-   StopMoveButton=setInterval(move_down,10)
-   clearInterval(StopMoveTop);  
-   snake.style.transform="rotate("+90+"deg)";
-    clearInterval(StopMoveleft);
-    clearInterval(stopMoveRight)
-   direction="down";
 
+   setInterval(()=>{
+      h-=1;
+      snake.style.top=h+"px";
+      },0.6)
+}
+if(e.keyCode==39){
+   setInterval(()=>{
+      g+=1;
+      snake.style.left=g+"px";
+      },0.6)
+}else if(e==40){
    
 }
-
-}
-else{
-massage.innerHTML="Please start game!"
-massage.style.left="0";
-setTimeout(() => {
-   massage.style.left="-423px";
-}, 2000);
-
-}
-
-}
+}   
 
 
-//  functions 
-
-function move_right(){
-   RL--;
- snake.style.right=RL+"px";  
-check_accident();
-}
-function move_down(){
-   check_accident();
-   TB--;
- snake.style.bottom=TB+"px";  
-}
-function move_top(){
-   check_accident();
-   TB+=1;
- snake.style.bottom=TB+"px";  
-}
-function move_left(){
-    
-   RL++;
-   snake.style.right=RL+"px";
-   check_accident();
-}
-function set_direction(){
-   if(direction=="top" || direction=="bottom"){
-
-   }
-   else{
-      snake.style.transform="rotate("+0+"deg)";
-   }
-}
-function check_accident(){
- if(snake.style.right=="220px" ||snake.style.right=="-240px"||snake.style.bottom=="230px"||snake.style.bottom=="-230px"){
-massage.innerHTML="game over  ";
-massage.style.left="0"
-setTimeout(() => {
-   massage.style.left="-423px"
-}, 2000); 
-clearInterval(StopMoveleft)
-clearInterval(stopMoveRight)
-clearInterval(StopMoveTop);
-clearInterval(StopMoveButton);
-play_btn.style.display="block";
-}
 
 
-}
-function paly(){
-   play_btn.addEventListener("click",()=>{
-      
-      play_btn.style.display="none";
-   })
 
-   setTimeout(()=>{
-      massage.style.left="-423px";
-   },2000)
-}
+seed_possion();
 
-function set_seed_possion(){
- ran1=480*Math.random();
- ran2=480*Math.random();
- ran3=480*Math.random();
- ran4=480*Math.random();
- seed.style.top=ran1+"px";
- seed.style.left=-ran2+"px";
- loc.x=-ran2;
- seed.style.right=ran3+"px";
- loc.x=ran3;
- seed.style.bottom=ran4+"px";
- loc.y=ran4;
+
+
+
+
+
+// function
+
+function increase_snake(){}
+
+
+function seed_possion(){
+  seed.style.left=ran1+"px";
+  seed.style.top=ran2+"px";
+  if(parseInt(seed.style.left)<=190){
+   seed.style.left=240+"px";
+
+  }
+  if(parseInt(seed.style.top)<110){
+   seed.style.top=150+"px";
+  }
 
 }
 
 
-function eat_food(){
- if(snake.style.left==seed.style.left || snake.style.top==seed.style.top || snake.style.bottom==seed.style.bottom){
-   alert("yes")
- }  
-}

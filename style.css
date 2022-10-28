@@ -24,6 +24,8 @@ h1{
     width: 20px;
     position: absolute;
     background: #ffc107;
+    left: 190px;
+    top: 110px;
 }
 #seed{
     background-color: red;
@@ -60,10 +62,11 @@ h2#high_score{
     background: #f31100;
     position: absolute;
     left: 360px;
-    bottom: 0px;
-    border-radius: 10px 10px 0 0;
+    top: -90px;
+    border-radius: 0px 0px 10px 10px;
     font-size: 2em;
     font-family: sans-serif;
     text-align: center;
     bottom: -90px;
+    transition: all 1.4s;
 }
