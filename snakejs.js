@@ -11,7 +11,7 @@ let play_btn=document.querySelector("#play");
 let massage=document.querySelector("#massage");
 let x=0,y=0;
 let direction;
-
+let stop1,stop2,stop3,stop4;
 // random number
 let ran1=1160*Math.random();
 let ran2=480*Math.random();
@@ -32,27 +32,42 @@ play_btn.addEventListener("click",()=>{
 let g=190,h=110;
 
 document.onkeydown=function (e){
-if(e.keyCode==37){//
-setInterval(()=>{
+if(e.keyCode==37){//left
+stop1=setInterval(()=>{
    g-=1;
    snake.style.left=g+"px";
    },0.6)
+   clearInterval(stop2 );
+   clearInterval(stop3);
+   clearInterval(stop4);
 }
 else if(e.keyCode==38)
 {
 
-   setInterval(()=>{
+  stop2= setInterval(()=>{//top
       h-=1;
       snake.style.top=h+"px";
       },0.6)
+      clearInterval(stop1);
+      clearInterval(stop3);
+      clearInterval(stop4);
 }
 if(e.keyCode==39){
-   setInterval(()=>{
+  stop3= setInterval(()=>{//right
       g+=1;
       snake.style.left=g+"px";
       },0.6)
-}else if(e==40){
-   
+      clearInterval(stop1);
+      clearInterval(stop2);
+      clearInterval(stop4);
+}else if(e.keyCode==40){//down
+stop4=setInterval(() => {
+   h+=1;
+   snake.style.top=h+"px";
+}, 0.6);    
+clearInterval(stop1);
+clearInterval(stop2);
+clearInterval(stop3);
 }
 }   
 
